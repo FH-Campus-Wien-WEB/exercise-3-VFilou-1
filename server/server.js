@@ -20,6 +20,20 @@ app.use(express.static(path.join(__dirname, 'files')));
    When a query parameter for a specific genre is given, 
    return only movies that have the given genre
  */
+app.get('/genres', function (req, res) {
+  const movies = Object.values(movieModel)
+
+  const genreSet = new Set()
+
+  movies.forEach(movie => {
+    movie.Genres.forEach(g => genreSet.add(g))
+  })
+
+  const genres = Array.from(genreSet).sort()
+
+  res.json(genres)
+})
+
 app.get('/movies', function (req, res) {
   let movies = Object.values(movieModel)
   res.send(movies);
