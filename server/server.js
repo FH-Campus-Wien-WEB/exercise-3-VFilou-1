@@ -20,6 +20,20 @@ app.use(express.static(path.join(__dirname, 'files')));
    When a query parameter for a specific genre is given, 
    return only movies that have the given genre
  */
+app.get('/movies', function (req, res) {
+  let movies = Object.values(movieModel)
+
+  const genre = req.query.genre
+
+  if (genre) {
+    movies = movies.filter(movie =>
+      movie.Genres.includes(genre)
+    )
+  }
+
+  res.json(movies)
+})
+
 app.get('/genres', function (req, res) {
   const movies = Object.values(movieModel)
 
@@ -32,11 +46,6 @@ app.get('/genres', function (req, res) {
   const genres = Array.from(genreSet).sort()
 
   res.json(genres)
-})
-
-app.get('/movies', function (req, res) {
-  let movies = Object.values(movieModel)
-  res.send(movies);
 })
 
 // Configure a 'get' endpoint for a specific movie

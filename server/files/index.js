@@ -65,33 +65,9 @@ function loadMovies(genre) {
   if (genre) {
   url.searchParams.set("genre", genre)
 }
-  const genres = JSON.parse(xhr.responseText);
-
-const nav = document.querySelector("nav")
-
-
-const ul = document.createElement("ul")
-nav.append(ul)
 
 // ALL button
-const liAll = document.createElement("li")
-const btnAll = document.createElement("button")
-btnAll.textContent = "All"
-btnAll.onclick = () => loadMovies()
-liAll.append(btnAll)
-ul.append(liAll)
 
-// Genre buttons
-genres.forEach(g => {
-  const li = document.createElement("li")
-  const btn = document.createElement("button")
-
-  btn.textContent = g
-  btn.onclick = () => loadMovies(g)
-
-  li.append(btn)
-  ul.append(li)
-})
 
   xhr.open("GET", url)
   xhr.send()
@@ -100,14 +76,33 @@ genres.forEach(g => {
 window.onload = function () {
   const xhr = new XMLHttpRequest();
   xhr.onload = function () {
-    const listElement = document.querySelector("nav>ul");
+    const nav = document.querySelector("nav")
+    const ul = document.createElement("ul")
+    nav.append(ul)
 
     if (xhr.status === 200) {
       /* Task 1.3. Add the genre buttons to the listElement and 
          initialize them with a click handler that calls the 
          loadMovies(...) function above. */
       const genres = JSON.parse(xhr.responseText);
+      const liAll = document.createElement("li")
+      const btnAll = document.createElement("button")
+      btnAll.textContent = "All"
+      btnAll.onclick = () => loadMovies()
+      liAll.append(btnAll)
+      ul.append(liAll)
 
+      // Genre buttons
+      genres.forEach(g => {
+        const li = document.createElement("li")
+        const btn = document.createElement("button")
+
+        btn.textContent = g
+        btn.onclick = () => loadMovies(g)
+
+        li.append(btn)
+        ul.append(li)
+      })
       /* When a first button exists, we click it to load all movies. */
       const firstButton = document.querySelector("nav button");
       if (firstButton) {

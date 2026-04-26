@@ -11,11 +11,7 @@ html, body {
 }
 
 /* Center the nav's header and list */
-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 
 /* navigation buttons have full width */
 nav button {
@@ -30,48 +26,90 @@ ul {
 }
 
 /* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+body {
+  margin: 0;
+  /*display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "h"
+    "n"
+    "m"
+    "f";*/
+}
+header {
+  grid-area: h;
+  
+}
 
+nav {
+  grid-area: n;
+  background-color: #eee;
+  padding: 10px;
+}
+
+main {
+  grid-area: m;
+  overflow-y: auto;
+}
+
+footer {
+  grid-area: f;
+}
+
+main {
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  body {
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "h h"
+      "n m"
+      "f f";
+  }
+}
 
 /* Task 3.1. Make the header element a flex container and center its children
    vertically and horizontally.
  */
+ header {
+  display: flex;
+  justify-content: center;   
+  align-items: center;       
+}
 
 
 /* Task 3.2. Make the list items of the unordered list in the nav element a flex container, 
    use column direction and center the child items
  */
+ nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
 
 /* Task 3.3. Make the main element a Flexbox container */
-
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
 
 /* Task 3.4. Make the footer's ul a Flexbox container */
-
+footer ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* From here on styling from exercise 1 */
-img {
-  border-radius: 12px;
-}
-
-article {
-  background-color: lightgray;
-  border-radius: 16px;
-  padding: 16px;
-  width: 384px;
-  margin: 8px;
-}
-
-a {
-  color: beige;
-}
-
-span {
-  margin-right: 4px;
-}
-
-.genre {
-  padding: 4px 8px;
-  border: solid black 1px;
-  border-radius: 6px;
-  background-color: darkgray;
-  font-weight: bold;
-}
